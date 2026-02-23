@@ -32,11 +32,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "extra": {
-      "eas": {
-        "projectId": "auto"
-      }
-    },
     "plugins": [
       [
         "expo-notifications",
@@ -44,6 +39,12 @@
           "sounds": []
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "6d64ba7e-3788-408b-a7eb-f0638426940c"
+      }
+    },
+    "owner": "4mkbs"
   }
 }
