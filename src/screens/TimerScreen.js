@@ -4,9 +4,6 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  TextInput,
-  Vibration,
-  Dimensions,
 } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
 import { useSettings } from '../contexts/SettingsContext';
@@ -16,8 +13,7 @@ import {
   cancelTimerNotification,
   requestPermissions,
 } from '../utils/notifications';
-
-const { width } = Dimensions.get('window');
+import { playTimerSound, stopAlarmSound } from '../utils/soundService';
 
 const TimerScreen = () => {
   const { theme } = useTheme();
@@ -47,9 +43,8 @@ const TimerScreen = () => {
             clearInterval(intervalRef.current);
             setIsRunning(false);
             setIsFinished(true);
-            if (settings.vibrationEnabled) {
-              Vibration.vibrate([0, 500, 200, 500, 200, 500]);
-            }
+            // Play alarm sound and vibrate
+            playTimerSound({ vibrate: settings.vibrationEnabled });
             return 0;
           }
           return prev - 1;
@@ -91,6 +86,7 @@ const TimerScreen = () => {
     setIsFinished(false);
     setRemainingTime(0);
     await cancelTimerNotification();
+    await stopAlarmSound();
   };
 
   const adjustValue = (setter, value, max, delta) => {
@@ -264,6 +260,18 @@ const TimerScreen = () => {
 
           {/* Controls */}
           <View style={styles.controlsRow}>
+            {isFinished && (
+              <TouchableOpacity
+                style={[styles.controlButton, { backgroundColor: colors.danger }]}
+                onPress={async () => {
+                  await stopAlarmSound();
+                  handleReset();
+                }}
+              >
+                <Text style={styles.controlButtonText}>Dismiss</Text>
+              </TouchableOpacity>
+            )}
+
             <TouchableOpacity
               style={[styles.controlButton, { backgroundColor: colors.surfaceVariant }]}
               onPress={handleReset}

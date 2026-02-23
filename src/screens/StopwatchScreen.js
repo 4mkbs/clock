@@ -5,12 +5,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   FlatList,
-  Dimensions,
 } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
 import { formatStopwatchTime } from '../utils/helpers';
-
-const { width } = Dimensions.get('window');
 
 const StopwatchScreen = () => {
   const { theme } = useTheme();

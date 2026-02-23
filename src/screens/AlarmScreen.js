@@ -10,7 +10,6 @@ import {
   TextInput,
   ScrollView,
   Alert,
-  Platform,
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { useTheme } from '../contexts/ThemeContext';

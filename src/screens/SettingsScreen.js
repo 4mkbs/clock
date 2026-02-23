@@ -183,7 +183,7 @@ const SettingsScreen = () => {
 
       <View style={styles.footer}>
         <Text style={[styles.footerText, { color: colors.textSecondary }]}>
-          🕒 Clock App • Built with Expo
+          🕒 Clock App • Built with mkbs
         </Text>
       </View>
     </ScrollView>
